@@ -1,11 +1,14 @@
 ﻿using Contracts;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Entities;
 
 namespace WebAPi.Extensions
 {
@@ -29,10 +32,17 @@ namespace WebAPi.Extensions
             });
         }
 
+        // Add singleton LoggerManager - One instance to be used in many Controllers through Dependency Injection
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
             services.AddSingleton<ILoggerManager, LoggerManager>();
         }
 
+        public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["mysqlconnection:connectionString"];
+            services.AddDbContext<RepositoryContext>
+                (o => o.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion));
+        }
     }
 }

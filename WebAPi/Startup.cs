@@ -33,7 +33,7 @@ namespace WebAPi
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
-
+            services.ConfigureMySqlContext(Configuration);
             // Let it be last
             services.AddControllers();
         }
