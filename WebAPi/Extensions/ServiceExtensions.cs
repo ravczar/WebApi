@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Entities;
+using Repository;
 
 namespace WebAPi.Extensions
 {
@@ -67,5 +68,15 @@ namespace WebAPi.Extensions
             services.AddDbContext<RepositoryContext>
                 (o => o.UseMySql(connectionString, MySqlServerVersion.LatestSupportedServerVersion));
         }
+
+        /// <summary>
+        /// Add Repository wrapper to inject one instance into controller.
+        /// </summary>
+        /// <param name="services">API service collection descriptors.</param>
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+
     }
 }

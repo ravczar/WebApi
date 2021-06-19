@@ -8,8 +8,8 @@ namespace Contracts
     /// </summary>
     public interface IRepositoryWrapper
     {
-        IUserRepository User { get; set; }
-        IAccountRepository Account { get; set; }
+        IUserRepository User { get; }
+        IAccountRepository Account { get; }
         void Save();
     }
 }

@@ -6,11 +6,19 @@ using System.Text;
 
 namespace Repository
 {
+    /// <summary>
+    /// RepositoryWrapper class to acces all model-repositories in api from each controller.
+    /// </summary>
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private RepositoryContext _repoContext;
         private IUserRepository _owner;
         private IAccountRepository _account;
+
+        public RepositoryWrapper(RepositoryContext repositoryContext)
+        {
+            _repoContext = repositoryContext;
+        }
 
         public IUserRepository User
         {

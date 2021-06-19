@@ -38,6 +38,7 @@ namespace WebAPi
             services.ConfigureIISIntegration();
             services.ConfigureLoggerService();
             services.ConfigureMySqlContext(Configuration);
+            services.ConfigureRepositoryWrapper();
             // Let it be last
             services.AddControllers();
         }
